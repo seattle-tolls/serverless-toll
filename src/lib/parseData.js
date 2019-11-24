@@ -31,19 +31,10 @@ const parsedData = (data) => {
   return data.children
     .map(getChildrenArray()
     )
-    .filter((child, i)=> i !== 0)
+    .filter((child, i) => i !== 0)
     .reduce(getReducedArray(), {})
 }
 
-module.exports = (table) =>{
+module.exports = (table) => {
   return parsedData(table)
 }
-
-
-// const parseData = (table) => {
-
-//   console.log('FROM TABLE', table)
-//   return 'ParsedData'
-// }
-
-// module.exports = parseData

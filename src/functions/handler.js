@@ -1,16 +1,39 @@
 'use strict'
 
-module.exports.hello = async event => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        shark: 'in the dark',
-      },
-    ),
-  }
+const getData = require('../lib/getData')
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+const tollURI = process.env.TOLL_URI
+const tunnel = process.env.TOLL_99
+const bridge = process.env.TOLL_520
+
+module.exports = {
+  getTolls: async event => {
+    try {
+      const tunnelData = await getData(`${tollURI}/${tunnel}`)
+      const bridgeData = await getData(`${tollURI}/${bridge}`)
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          message: 'Success',
+          toll520: {
+            name: '99 Tunnel',
+            data: tunnelData,
+          },
+          toll99: {
+            name: '520 Bridge',
+            data: bridgeData,
+          },
+        }),
+      }
+    }
+    catch (err) {
+      console.log('ERROR:', err)
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          message: `ERROR: ${err}`,
+        }),
+      }
+    }
+  },
 }

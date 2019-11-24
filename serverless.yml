@@ -55,20 +55,23 @@ environment:
   TOLL_520: ${env:TOLL_520}
 
 # you can add packaging information here
-#package:
+package:
+  exclude:
+    - index.js
+    - temp/**
 #  include:
 #    - include-me.js
 #    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
+
+  #  - exclude-me.js
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: src/functions/handler.hello
+  getTolls:
+    handler: src/functions/handler.getTolls
     events:
       - http:
-          path: /hello
+          path: /v1/api/tolls
           method: get
 
 #    The following are a few example events you can configure

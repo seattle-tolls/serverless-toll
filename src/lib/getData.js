@@ -8,7 +8,7 @@ const getData = async (url) => {
   const buff = await link.buffer()
   const html = await buff.toString()
 
-  const { weekdays, weekend} = scrapeData(html)
+  const { weekdays, weekend } = scrapeData(html)
 
   const data = {
     weekdays,
