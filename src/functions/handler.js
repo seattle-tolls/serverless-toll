@@ -15,11 +15,11 @@ module.exports = {
         statusCode: 200,
         body: JSON.stringify({
           message: 'Success',
-          toll520: {
+          toll99: {
             name: '99 Tunnel',
             data: tunnelData,
           },
-          toll99: {
+          toll520: {
             name: '520 Bridge',
             data: bridgeData,
           },
