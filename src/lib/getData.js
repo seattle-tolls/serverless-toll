@@ -7,15 +7,15 @@ const getData = async (url) => {
   const buff = await link.buffer()
   const html = await buff.toString()
 
-  console.log( 'HTML -->', html)
+  console.log('HTML -->', html)
 
-    const data =  {
-      weekdays: html,
-      weekend: html
+  const data = {
+    weekdays: html,
+    weekend: html,
   }
 
   return (
-  data
+    data
   )
 }
 
