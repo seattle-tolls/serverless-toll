@@ -12,6 +12,8 @@
 # Happy Coding!
 
 service: serverless-toll
+plugins:
+  - serverless-dotenv-plugin
 # app and org for use with dashboard.serverless.com
 app: seattle-toll
 org: ronbarrantes
@@ -59,11 +61,22 @@ region: us-west-2
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/functions/handler.hello
     events:
       - http:
           path: /hello
           method: get
+
+  getTolls:
+    handler: src/functions/getTolls.getTolls
+    events:
+      - http:
+          path: /getTolls
+          method: get
+          
+    environment:
+      TOLL_URL: ${env:TOLL_URL}
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
