@@ -1,5 +1,6 @@
-const cheerio = require('cheerio')
 const fetch = require('node-fetch')
+
+const scrapeData = require('./scrapeData')
 
 const getData = async (url) => {
 
@@ -7,16 +8,13 @@ const getData = async (url) => {
   const buff = await link.buffer()
   const html = await buff.toString()
 
-  console.log('HTML -->', html)
+  const { weekdays, weekend} = scrapeData(html)
 
   const data = {
-    weekdays: html,
-    weekend: html,
+    weekdays,
+    weekend,
   }
 
-  return (
-    data
-  )
+  return data
 }
-
 module.exports = getData
