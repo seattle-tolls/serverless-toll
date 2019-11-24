@@ -49,6 +49,10 @@ region: us-west-2
 # you can define service wide environment variables here
 #  environment:
 #    variable1: value1
+environment:
+  TOLL_URI: ${env:TOLL_URI}
+  TOLL_99: ${env:TOLL_99}
+  TOLL_520: ${env:TOLL_520}
 
 # you can add packaging information here
 #package:
@@ -74,8 +78,8 @@ functions:
           path: /getTolls
           method: get
           
-    environment:
-      TOLL_URL: ${env:TOLL_URL}
+
+
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

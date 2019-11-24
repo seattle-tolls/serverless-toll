@@ -15,7 +15,7 @@ app.get('/api/get/tolls', async (req, res) => {
     return res.json({
       statusCode: 200,
       message: 'Success',
-      payload: {
+      body: {
         toll520: {
           name: '99 Tunnel',
           data: tunnelData,
@@ -26,7 +26,6 @@ app.get('/api/get/tolls', async (req, res) => {
         },
       },
     })
-
   }
   catch (err) {
     console.log('ERROR:', err)
