@@ -1,5 +1,3 @@
-'use strict'
-
 const getChildrenArray = () => {
   return child => child.children
     .filter((child) => child.type === 'tag')
