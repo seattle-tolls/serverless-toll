@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "deploy": "serverless deploy --region us-west-2"
+  },
   "devDependencies": {
     "express": "^4.17.1",
     "serverless-dotenv-plugin": "^2.1.1"
