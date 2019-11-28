@@ -36,4 +36,11 @@ module.exports = {
       }
     }
   },
+
+  create: async event => {},
+
+  list: async event => {}
+
+  // deleteTolls: async event => {},
+  // createTolls: async event => {},
 }
