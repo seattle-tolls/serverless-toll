@@ -37,7 +37,17 @@ module.exports = {
     }
   },
 
-  create: async event => {},
+  create: async event => {
+
+    const toll = JSON.parse(event.body)
+
+    return{
+      statusCode: 200,
+      body: JSON.stringify(
+        { ...toll }
+      )
+    }
+  },
 
   list: async event => {}
 

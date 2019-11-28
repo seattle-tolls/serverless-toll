@@ -42,7 +42,13 @@ functions:
       - http:
           path: /api/v1/tolls/getTolls
           method: get
-  
+
+  create:
+    handler: src/functions/handler.create
+    events:
+      - http:
+          path: /api/v1/tolls
+          method: post  
   # create:
   # handler: src/functions/handler.create
   # events:
