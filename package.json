@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "deploy": "serverless deploy --region us-west-2"
+    "deploy": "serverless deploy --region us-west-2",
+    "serverless-offline": "serverless offline start",
+    "local-server-start": "live-server temp/htmls --no-browser"
   },
   "devDependencies": {
     "aws-sdk-mock": "^4.5.0",
@@ -13,6 +15,7 @@
     "aws-sdk": "^2.578.0",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "uuid": "^3.3.3"
   }
 }

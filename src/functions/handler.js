@@ -1,6 +1,8 @@
 'use strict'
 
 const getData = require('../lib/getData')
+const createToll = require('./create')
+const listTolls = require('./list')
 
 const tollURI = process.env.TOLL_URI
 const tunnel = process.env.TOLL_99
@@ -37,19 +39,8 @@ module.exports = {
     }
   },
 
-  create: async event => {
-
-    const toll = JSON.parse(event.body)
-
-    return{
-      statusCode: 200,
-      body: JSON.stringify(
-        { ...toll }
-      )
-    }
-  },
-
-  list: async event => {}
+  create: createToll,
+  list: listTolls
 
   // deleteTolls: async event => {},
   // createTolls: async event => {},
