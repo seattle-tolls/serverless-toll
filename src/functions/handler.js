@@ -1,7 +1,7 @@
 'use strict'
 
 const getData = require('../lib/getData')
-const createToll = require('./create')
+// const createToll = require('./create')
 const listTolls = require('./list')
 
 const tollURI = process.env.TOLL_URI
@@ -39,7 +39,7 @@ module.exports = {
     }
   },
 
-  create: createToll,
+  // create: createToll,
   list: listTolls
 
   // deleteTolls: async event => {},

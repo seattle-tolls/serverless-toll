@@ -1,6 +1,6 @@
 service: serverless-toll
 plugins:
-  - serverless-dotenv-plugin
+  # - serverless-dotenv-plugin
   - serverless-dynamodb-local
   - serverless-offline
 
@@ -12,10 +12,8 @@ plugins:
 #       migrate: true
 #     migration:
 #       dir: offline/migrations
-        
-
-app: seattle-toll
-org: ronbarrantes
+# app: seattle-toll
+# org: ronbarrantes
 
 provider:
   name: aws
@@ -25,7 +23,7 @@ provider:
   region: us-west-2
 
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    # DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     TOLL_URI: https://www.wsdot.wa.gov
     TOLL_99: tolling/sr-99-tunnel-toll-rates
     TOLL_520: Tolling/520/520tollrates.htm
@@ -43,12 +41,12 @@ functions:
           path: /api/v1/tolls/getTolls
           method: get
 
-  create:
-    handler: src/functions/handler.create
-    events:
-      - http:
-          path: /api/v1/tolls
-          method: post  
+  # create:
+  #   handler: src/functions/handler.create
+  #   events:
+  #     - http:
+  #         path: /api/v1/tolls
+  #         method: post  
 
   list:
     handler: src/functions/handler.list
@@ -59,16 +57,16 @@ functions:
 
   # delete:
 
-resources:
-  Resources:
-    TollsDynamoTable:
-      Type: 'AWS::DynamoDB::Table'
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+# resources:
+#   Resources:
+#     TollsDynamoTable:
+#       Type: 'AWS::DynamoDB::Table'
+#       Properties:
+#         AttributeDefinitions:
+#           - AttributeName: id
+#             AttributeType: S
+#         KeySchema:
+#           - AttributeName: id
+#             KeyType: HASH
+#         BillingMode: PAY_PER_REQUEST
+#         TableName: ${self:provider.environment.DYNAMODB_TABLE}
