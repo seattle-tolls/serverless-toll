@@ -1,8 +1,10 @@
 'use strict'
 
 const getData = require('../lib/getData')
-// const createToll = require('./create')
+const createToll = require('./create')
 const listTolls = require('./list')
+// const updateDb = require('./update-db')
+const populateDb = require('./populate-db')
 
 const tollURI = process.env.TOLL_URI
 const tunnel = process.env.TOLL_99
@@ -40,8 +42,10 @@ module.exports = {
   },
 
   // create: createToll,
-  list: listTolls
+  // list: listTolls,
 
+  // updateDb,
+  populateDb,
   // deleteTolls: async event => {},
   // createTolls: async event => {},
 }
