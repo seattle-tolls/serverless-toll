@@ -4,9 +4,9 @@ const updateDb = async event => {
 
   console.log(`---> I'm a cron job mufuka`)
 
-// TODO: Write the update feature based on the name
+  // TODO: Write the update feature based on the name
 
-// TODO: Make sure update feature works with cron job
+  // TODO: Make sure update feature works with cron job
 
   return {
     statusCode: 200,

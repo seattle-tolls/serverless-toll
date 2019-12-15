@@ -42,7 +42,7 @@ module.exports = {
   },
 
   // create: createToll,
-  // list: listTolls,
+  list: listTolls,
 
   // updateDb,
   populateDb,
