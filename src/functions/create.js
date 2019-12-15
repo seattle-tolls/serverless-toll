@@ -6,15 +6,6 @@ const uuid = require('uuid')
 const create = async event => {
   // verify info
 
-  const bodyObj = {}
-  try {
-    bodyObj = JSON.parse(event.body)
-  }
-  catch (jsonError) {
-    console.log('There was an error parsing the body', jsonError)
-    return { statusCode: 400 }
-  }
-
   // const {
   //   toll, tollName, hour, isWeekday,
   //   goodToGo, payByMail, schedule,

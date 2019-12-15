@@ -20,10 +20,11 @@ const populateDb = async event => {
   try{
     const tunnelData = await writeData(toll99)
     const bridgeData = await writeData(toll520)
+
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: 'All worked out great',
+        message: 'Success',
         data: {
           tunnelData,
           bridgeData,

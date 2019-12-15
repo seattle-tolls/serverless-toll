@@ -1,5 +1,7 @@
+'use strict'
 
-
+const dynamodb = require('./dynamo-db')
+const getData = require('./get-data')
 
 const writeData = async (dataObj) => {
 
@@ -7,21 +9,34 @@ const writeData = async (dataObj) => {
   const date = Date.now()
   let data = {}
 
-  // try {
-  //   const tunnelData = await getData(`${tollURI}/${tunnel}`)
-  //     console.log('TUNNEL DATA', tunnelData)
-  // } catch (error) {
-  //   console.error('ERROR: something went very wrong', error)
-  // }
-
-  // console.log('WRITE DATA-->', name,'|', url)
-
   if (!name || !url){
+    console.log('ERROR: Missing name or url |', name, url)
     throw new Error('Missing name or url')
   }
 
-  return { name, url, date, data }
-}
+  try {
+    data = await getData(url)
+  }
+  catch (err) {
+    console.log('ERROR: Problem getting the data from url |', err)
+    throw new Error('ERROR: Problem getting the data from url')
+  }
 
+  const putParams = {
+    TableName: process.env.DYNAMODB_TABLE,
+    Item: { name, date, data }
+  }
+
+  let putResult = {}
+
+  try {
+    putResult = await dynamodb.put(putParams).promise()
+    console.log(putResult)
+  } catch (err) {
+    console.log('ERROR: Problem writing to DynamoDB', err)
+    throw new Error('ERROR: Problem writing to DynamoDB')
+  }
+  return putResult
+}
 
 module.exports = writeData
