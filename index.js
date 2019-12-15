@@ -4,7 +4,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 
-const getData = require('./src/lib/getData')
+const getData = require('./src/lib/get-data')
 
 const tollURI = process.env.LOCAL_TOLL_URI
 const tunnel = process.env.LOCAL_TOLL_99

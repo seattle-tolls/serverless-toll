@@ -1,37 +1,14 @@
 'use strict'
 
-const getData = require('../lib/getData')
+const writeData = require('../lib/write-data')
 
 const tollURI = process.env.TOLL_URI
 const tunnel = process.env.TOLL_99
 const bridge = process.env.TOLL_520
 
-const writeData = async (dataObj) => {
-
-  const { name, url } = dataObj
-  const date = Date.now()
-  let data = {}
-
-  // try {
-  //   const tunnelData = await getData(`${tollURI}/${tunnel}`)
-  //     console.log('TUNNEL DATA', tunnelData)
-  // } catch (error) {
-  //   console.error('ERROR: something went very wrong', error)
-  // }
-
-  // console.log('WRITE DATA-->', name,'|', url)
-
-  if (!name || !url){
-    throw new Error('Missing name or url')
-  }
-
-  return { name, url, date, data }
-}
-
 const populateDb = async event => {
-
   let toll99 = {
-    // name: 'toll99',
+    name: 'toll99',
     url: `${tollURI}/${tunnel}`,
   }
 

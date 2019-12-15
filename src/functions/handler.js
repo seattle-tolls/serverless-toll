@@ -1,6 +1,6 @@
 'use strict'
 
-const getData = require('../lib/getData')
+const getData = require('../lib/get-data')
 const createToll = require('./create')
 const listTolls = require('./list')
 // const updateDb = require('./update-db')
