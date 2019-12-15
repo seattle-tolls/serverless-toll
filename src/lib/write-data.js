@@ -2,11 +2,11 @@
 
 const dynamodb = require('./dynamo-db')
 const getData = require('./get-data')
+const { date } = require('./constants')
 
 const writeData = async (dataObj) => {
 
   const { name, url } = dataObj
-  const date = Date.now()
   let data = {}
 
   if (!name || !url){
@@ -24,7 +24,7 @@ const writeData = async (dataObj) => {
 
   const putParams = {
     TableName: process.env.DYNAMODB_TABLE,
-    Item: { name, date, data }
+    Item: { name, date, data },
   }
 
   let putResult = {}
@@ -32,7 +32,8 @@ const writeData = async (dataObj) => {
   try {
     putResult = await dynamodb.put(putParams).promise()
     console.log(putResult)
-  } catch (err) {
+  }
+  catch (err) {
     console.log('ERROR: Problem writing to DynamoDB', err)
     throw new Error('ERROR: Problem writing to DynamoDB')
   }

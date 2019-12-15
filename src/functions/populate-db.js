@@ -1,34 +1,31 @@
 'use strict'
 
 const writeData = require('../lib/write-data')
+const { toll520, toll99 } = require('../lib/constants')
 
 const tollURI = process.env.TOLL_URI
 const tunnel = process.env.TOLL_99
 const bridge = process.env.TOLL_520
 
 const populateDb = async event => {
-  let toll99 = {
-    name: 'toll99',
+  let tunnelToll = {
+    name: toll99,
     url: `${tollURI}/${tunnel}`,
   }
 
-  let toll520 = {
-    name: 'toll520',
+  let bridgeToll = {
+    name: toll520,
     url: `${tollURI}/${bridge}`,
   }
 
   try{
-    const tunnelData = await writeData(toll99)
-    const bridgeData = await writeData(toll520)
+    await writeData(tunnelToll)
+    await writeData(bridgeToll)
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         message: 'Success',
-        data: {
-          tunnelData,
-          bridgeData,
-        },
       }),
     }
   }

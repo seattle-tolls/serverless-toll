@@ -1,9 +1,10 @@
 service: serverless-toll
 plugins:
-  - serverless-dotenv-plugin
+  # - serverless-dotenv-plugin
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-offline-scheduler
+  - serverless-api-gateway-caching
 
 custom:
   dynamodb:
@@ -15,6 +16,8 @@ custom:
       - dev
     migration:
       dir: offline/migrations
+  apiGatewayCaching:
+    enabled: true
 
 provider:
   name: aws
@@ -45,6 +48,7 @@ provider:
 
 package:
   exclude:
+    - .dynamodb/**
     - index.js
     - temp/**
 
@@ -55,6 +59,8 @@ functions:
       - http:
           path: /api/v1/tolls/getTolls
           method: get
+          caching:
+            enabled: true
 
   # create:
   #   handler: src/functions/handler.create
@@ -69,15 +75,21 @@ functions:
       - http:
           path: /api/v1/tolls
           method: get  
+          caching:
+            enabled: true
 
   # delete:
 
-  populateDb:
-    handler: src/functions/handler.populateDb
+  populate:
+    handler: src/functions/handler.populate
     events:
       - http: 
           path: /api/v1/tolls/populate-db
           method: get
+      - schedule: 
+          rate: cron(0 8 1 * ? *)
+      # - schedule: 
+      #     rate: cron(* * * * *)
 
   # updateDb:
   #   handler: src/functions/handler.updateDb
