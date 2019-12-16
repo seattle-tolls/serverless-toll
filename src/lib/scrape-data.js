@@ -1,5 +1,7 @@
+'use strict'
+
 const cheerio = require('cheerio')
-const parseData = require('./parseData')
+const parseData = require('./parse-data')
 
 const scrapeData = (html) => {
   const $ = cheerio.load(html)

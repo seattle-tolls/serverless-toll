@@ -1,9 +1,10 @@
+'use strict'
+
 const fetch = require('node-fetch')
 
-const scrapeData = require('./scrapeData')
+const scrapeData = require('./scrape-data')
 
 const getData = async (url) => {
-
   const link = await fetch(url)
   const buff = await link.buffer()
   const html = await buff.toString()
@@ -16,5 +17,6 @@ const getData = async (url) => {
   }
 
   return data
+
 }
 module.exports = getData
