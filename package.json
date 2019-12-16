@@ -2,7 +2,8 @@
   "scripts": {
     "deploy": "serverless deploy --region us-west-2",
     "serverless-offline": "serverless offline start",
-    "local-server-start": "live-server temp/htmls --no-browser"
+    "local-server-start": "live-server temp/htmls --no-browser",
+    "populate-remote": "sls invoke --stage prod --function populate"
   },
   "devDependencies": {
     "aws-sdk": "^2.590.0",
