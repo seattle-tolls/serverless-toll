@@ -22,6 +22,8 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
+  apiKeys:
+    - serverless-toll-apikey
   stage: dev
   region: us-west-2
   environment:
@@ -45,7 +47,6 @@ provider:
 # app: seattle-toll
 # org: ronbarrantes
 
-
 package:
   exclude:
     - .dynamodb/**
@@ -58,16 +59,10 @@ functions:
     events:
       - http:
           path: /api/v1/tolls/getTolls
-          method: get
+          method: get  
+          private: true
           caching:
             enabled: true
-
-  # create:
-  #   handler: src/functions/handler.create
-  #   events:
-  #     - http:
-  #         path: /api/v1/tolls
-  #         method: post  
 
   list:
     handler: src/functions/handler.list
@@ -75,47 +70,33 @@ functions:
       - http:
           path: /api/v1/tolls
           method: get  
+          private: true
           caching:
             enabled: true
 
-  # delete:
 
   populate:
     handler: src/functions/handler.populate
     events:
       - http: 
           path: /api/v1/tolls/populate-db
-          method: get
+          method: get  
+          private: true
       - schedule: 
           rate: cron(0 8 1 * ? *)
-      # - schedule: 
-      #     rate: cron(* * * * *)
-
-  # updateDb:
-  #   handler: src/functions/handler.updateDb
-  #   events:
-  #   - schedule: cron(0 8 1 * *)
-  #   - schedule: 
-  #       rate: cron(* * * * *)
-  #   - http:
-  #       path: /api/v1/tolls/update-db
-  #       method: get
 
 resources:
   Resources:
     TollTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:service}-${opt:stage, self:provider.stage} # -${self:provider.stage}
+        TableName: ${self:service}-${opt:stage, self:provider.stage}
         AttributeDefinitions:
           - AttributeName: name
             AttributeType: S
         KeySchema:
           - AttributeName: name
             KeyType: HASH
-        
-
-        #BillingMode: PAY_PER_REQUEST
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 2
@@ -124,26 +105,3 @@ resources:
         #   AttributeName: ttl
         #   Enabled: ENABLED
 
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
-
-
-# resources:
-#   Resources:
-#     TollsDynamoTable:
-#       Type: 'AWS::DynamoDB::Table'
-#       Properties:
-#         AttributeDefinitions:
-#           - AttributeName: id
-#             AttributeType: S
-#         KeySchema:
-#           - AttributeName: id
-#             KeyType: HASH
-#         BillingMode: PAY_PER_REQUEST
-#         TableName: ${self:provider.environment.DYNAMODB_TABLE}
