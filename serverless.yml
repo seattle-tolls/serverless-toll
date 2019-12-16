@@ -18,6 +18,7 @@ custom:
       dir: offline/migrations
   apiGatewayCaching:
     enabled: true
+    ttlInSeconds: 300
 
 provider:
   name: aws
