@@ -92,10 +92,10 @@ resources:
       Properties:
         TableName: ${self:service}-${opt:stage, self:provider.stage}
         AttributeDefinitions:
-          - AttributeName: name
+          - AttributeName: toll
             AttributeType: S
         KeySchema:
-          - AttributeName: name
+          - AttributeName: toll
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1

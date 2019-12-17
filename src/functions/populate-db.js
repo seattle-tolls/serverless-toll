@@ -9,12 +9,14 @@ const bridge = process.env.TOLL_520
 
 const populateDb = async event => {
   let tunnelToll = {
-    name: toll99,
+    name: '99 Tunnel',
+    toll: toll99,
     url: `${tollURI}/${tunnel}`,
   }
 
   let bridgeToll = {
-    name: toll520,
+    name: '520 Bridge',
+    toll: toll520,
     url: `${tollURI}/${bridge}`,
   }
 

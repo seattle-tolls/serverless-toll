@@ -6,11 +6,11 @@ const { date } = require('./constants')
 
 const writeData = async (dataObj) => {
 
-  const { name, url } = dataObj
+  const { name, url, toll} = dataObj
   let data = {}
 
-  if (!name || !url){
-    console.log('ERROR: Missing name or url |', name, url)
+  if (!name || !url || !toll){
+    console.log('ERROR: Missing toll, name or url |', toll, name, url)
     throw new Error('Missing name or url')
   }
 
@@ -24,7 +24,7 @@ const writeData = async (dataObj) => {
 
   const putParams = {
     TableName: process.env.DYNAMODB_TABLE,
-    Item: { name, date, data },
+    Item: { name, date, data, toll },
   }
 
   let putResult = {}
