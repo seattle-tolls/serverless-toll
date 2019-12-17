@@ -1,6 +1,6 @@
 service: serverless-toll
 plugins:
-  # - serverless-dotenv-plugin
+  - serverless-dotenv-plugin
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-offline-scheduler
@@ -78,10 +78,10 @@ functions:
   populate:
     handler: src/functions/handler.populate
     events:
-      # - http: 
-      #     path: /api/v1/tolls/populate-db
-      #     method: get  
-      #     private: true
+      - http: 
+          path: /api/v1/tolls/populate-db
+          method: get  
+          private: true
       - schedule: 
           rate: cron(0 8 1 * ? *)
 
