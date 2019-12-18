@@ -55,15 +55,6 @@ package:
     - temp/**
 
 functions:
-  getTolls:
-    handler: src/functions/handler.getTolls
-    events:
-      - http:
-          path: /api/v1/tolls/getTolls
-          method: get  
-          private: true
-          caching:
-            enabled: true
 
   list:
     handler: src/functions/handler.list
