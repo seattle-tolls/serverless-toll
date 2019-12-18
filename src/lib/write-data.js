@@ -31,7 +31,6 @@ const writeData = async (dataObj) => {
 
   try {
     putResult = await dynamodb.put(putParams).promise()
-    console.log(putResult)
   }
   catch (err) {
     console.log('ERROR: Problem writing to DynamoDB', err)

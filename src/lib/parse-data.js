@@ -1,3 +1,7 @@
+String.prototype.toNum = function() {
+  return parseFloat(this)
+}
+
 const getChildrenArray = () => {
   return child => child.children
     .filter((child) => child.type === 'tag')
@@ -7,7 +11,7 @@ const getChildrenArray = () => {
 const removeFunnyChars = (str) => {
   str = str.trim()
   const arr = [...str].map((s, i) => {
-    if(/[\w\d:. $]/.test(s))
+    if(/[\w\d:. ]/.test(s))
       return s
 
     if(s.charCodeAt(0) === 160) // remove weird &nbsp coming from the api
@@ -34,8 +38,8 @@ const getReducedArray = () => {
       ...curr,
       [hour]:{
         schedule: removeFunnyChars(schedule),
-        goodToGo: removeFunnyChars(goodToGo),
-        payByMail: removeFunnyChars(payByMail),
+        goodToGo: removeFunnyChars(goodToGo).toNum(),
+        payByMail: removeFunnyChars(payByMail).toNum(),
       },
     }
   }
